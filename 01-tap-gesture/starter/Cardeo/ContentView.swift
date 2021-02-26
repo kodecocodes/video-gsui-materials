@@ -33,16 +33,14 @@
 import SwiftUI
 
 struct ContentView: View {
-  @ObservedObject var learningStore = LearningStore()
-  
   var body: some View {
     TabView {
       DailyAnimal(animalName: starterAnimals.randomElement() ?? "Blobfish")
         .tabItem { Label("Today's Animal", systemImage: "tortoise.fill") }
       
-      LearnAnimals(learningStore: learningStore)
+      LearnAnimals()
+        .tabItem { Label("Learn Animals", systemImage: "rectangle.fill.on.rectangle.angled.fill") }
     }
-    
   }
 }
 

@@ -32,6 +32,19 @@
 
 import SwiftUI
 
+let starterAnimals = [
+  "Aye-Aye",
+  "Blobfish",
+  "Goblin Shark",
+  "Gulabi Goat",
+  "Jerboa",
+  "Maned Wolf",
+  "Pallas Cat",
+  "Potoo",
+  "Saiga Antelope",
+  "Tufted Deer"
+]
+
 @main
 struct CardeoApp: App {
     var body: some Scene {

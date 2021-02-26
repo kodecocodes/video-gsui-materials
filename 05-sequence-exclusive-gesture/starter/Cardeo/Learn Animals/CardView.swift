@@ -38,34 +38,82 @@ enum DiscardedDirection {
 }
 
 struct CardView: View {
-  let flashCard: FlashCard
-
+  @Binding var score: Int
+  @Binding var deck: [String]
+  
+  let animalName: String
+  let rotation = Angle(degrees: [0, 3.5, -10, -4.5, 6].randomElement()!)
+  
+  @State var revealed = false
+  @State var offset: CGSize = .zero
+  
+  func drag(animal: String, direction: DiscardedDirection) -> Void {
+    withAnimation(.easeIn) {
+      switch direction {
+      case .left:
+        self.offset = .init(width: -1000, height: 0)
+        score += 1
+      case .right:
+        self.offset = .init(width: 1000, height: 0)
+      }
+      
+      if animal == deck.first {
+        deck.removeAll()
+      }
+    }
+  }
+  
   var body: some View {
-    ZStack {
+    let drag = DragGesture()
+      .onChanged { self.offset = $0.translation }
+      .onEnded {
+        switch $0.translation.width {
+        case let width where width < -100:
+          self.drag(animal: self.animalName, direction: .left)
+        case let width where width > 100:
+          self.drag(animal: self.animalName, direction: .right)
+        default:
+          self.offset = .zero
+        }
+      }
+    
+    return ZStack {
       Rectangle()
         .foregroundColor(.red)
         .frame(width: 320, height: 210)
         .cornerRadius(12)
       VStack {
-        Image(flashCard.animalName)
+        Image(animalName)
           .resizable()
           .scaledToFit()
-          Text(flashCard.animalName)
+        if self.revealed {
+          Text(animalName)
             .font(.largeTitle)
             .foregroundColor(.white)
+        }
         Spacer()
       }
     }
-    .frame(width: 320, height: 210)
+    .rotationEffect(rotation)
     .shadow(radius: 6)
+    .frame(width: 320, height: 210)
+    .offset(self.offset)
     .animation(.spring())
+    .gesture(drag)
+    .gesture(
+      TapGesture(count: 2)
+        .onEnded {
+          withAnimation {
+            self.revealed = !self.revealed
+          }
+        }
+    )
   }
 }
 
 
 struct CardView_Previews: PreviewProvider {
   static var previews: some View {
-    let card = FlashCard(animalName: "Blobfish")
-    return CardView(flashCard: card)
+    CardView(score: .constant(0), deck: .constant(starterAnimals), animalName: "Pallas Cat")
   }
 }

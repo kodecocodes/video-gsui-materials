@@ -33,33 +33,48 @@
 import SwiftUI
 
 struct LearnAnimals: View {
-  @ObservedObject var learningStore: LearningStore
+  @State var deck: [String] = starterAnimals.shuffled()
+  @State var score = 0
   
   var body: some View {
     VStack(alignment: .center, spacing: 50.0) {
       Spacer()
-      Text("Swipe left if you remembered"
-            + "\nSwipe right if you didn’t")
-        .font(.headline)
-        .multilineTextAlignment(.center)
+      VStack(alignment: .center, spacing: 8.0) {
+        Text("\(Image(systemName: "arrowshape.turn.up.backward.fill")) Swipe left if you remembered")
+        Text("Swipe right if you didn’t \(Image(systemName: "arrowshape.turn.up.forward.fill"))")
+      }
+      .font(.headline)
       
-      DeckView(
-        onMemorized: {
-          self.learningStore.score += 1
-        },
-        deck: learningStore.deck
-      )
+      ZStack {
+        if deck.isEmpty {
+          Button {
+            score = 0
+            deck += starterAnimals.shuffled()
+          }
+          label: {
+            Label("Reset Deck", systemImage: "rectangle.fill.on.rectangle.angled.fill")
+              .font(.title)
+          }
+        } else {
+          ZStack {
+            ForEach(deck, id: \.self) { animal in
+              CardView(score: $score, deck: $deck, animalName: animal)
+            }
+          }
+        }
+      }
       
-      Text("Remembered \(self.learningStore.score)" + "/\(self.learningStore.deck.cards.count)")
+      Text("Remembered \(score)" + "/\(starterAnimals.count)")
       
       Spacer()
     }
-    .tabItem { Label("Learn Animals", systemImage: "rectangle.fill.on.rectangle.angled.fill") }
+    .animation(.spring())
   }
 }
 
+
 struct LearnAnimals_Previews: PreviewProvider {
-    static var previews: some View {
-        LearnAnimals(learningStore: LearningStore(deck: starterAnimals))
-    }
+  static var previews: some View {
+    LearnAnimals()
+  }
 }

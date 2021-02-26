@@ -33,79 +33,43 @@
 import SwiftUI
 
 struct CardView: View {
-  let flashCard: FlashCard
+  @Binding var score: Int
+  @Binding var deck: [String]
+  
+  let animalName: String
+  let rotation = Angle(degrees: [0, 3.5, -10, -4.5, 6].randomElement()!)
+  
   @State var revealed = false
-  @State var offset: CGSize = .zero
-  @GestureState var isLongPressed = false
-  
-  typealias CardDrag = (_ card: FlashCard,
-                        _ direction: DiscardedDirection) -> Void
-  
-  let dragged: CardDrag
-  
-  init(
-    _ card: FlashCard,
-    onDrag dragged: @escaping CardDrag = {_,_  in }
-  ) {
-    self.flashCard = card
-    self.dragged = dragged
-  }
   
   var body: some View {
-    let drag = DragGesture()
-      .onChanged { self.offset = $0.translation }
-      .onEnded {
-        switch $0.translation.width {
-        case let width where width < -100:
-          self.offset = .init(width: -1000, height: 0)
-          self.dragged(self.flashCard, .left)
-        case let width where width > 100:
-          self.offset = .init(width: 1000, height: 0)
-          self.dragged(self.flashCard, .right)
-        default:
-          self.offset = .zero
-        }
-      }
-    
-    let longPress = LongPressGesture(
-      minimumDuration: .greatestFiniteMagnitude,
-      maximumDistance: .greatestFiniteMagnitude
-    )
-    .updating($isLongPressed) { value, state, _ in
-      state = value
-    }
-    .simultaneously(with: drag)
-    
-    return ZStack {
+    ZStack {
       Rectangle()
         .foregroundColor(.red)
         .frame(width: 320, height: 210)
         .cornerRadius(12)
       VStack {
-        Image(flashCard.animalName)
+        Image(animalName)
           .resizable()
           .scaledToFit()
         if self.revealed {
-          Text(flashCard.animalName)
+          Text(animalName)
             .font(.largeTitle)
             .foregroundColor(.white)
         }
         Spacer()
       }
     }
-    .shadow(radius: isLongPressed ? 10 : 6)
+    .rotationEffect(rotation)
+    .shadow(radius: 6)
     .frame(width: 320, height: 210)
-    .offset(self.offset)
-    .scaleEffect(isLongPressed ? 1.1 : 1)
     .animation(.spring())
     .gesture(
       TapGesture(count: 2)
         .onEnded {
           withAnimation {
-            self.revealed = !self.revealed
+            self.revealed.toggle()
           }
         }
-        .exclusively(before: longPress)
     )
   }
 }
@@ -113,7 +77,6 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
   static var previews: some View {
-    let card = FlashCard(animalName: "Blobfish")
-    return CardView(card)
+    CardView(score: .constant(0), deck: .constant(starterAnimals), animalName: "Pallas Cat")
   }
 }

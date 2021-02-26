@@ -13,9 +13,6 @@
 		0A3A307625E86FCD00668FFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A307525E86FCD00668FFE /* Assets.xcassets */; };
 		0A3A307925E86FCD00668FFE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A307825E86FCD00668FFE /* Preview Assets.xcassets */; };
 		0A3A308625E8707700668FFE /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A308525E8707700668FFE /* CardView.swift */; };
-		0A3A308925E8711A00668FFE /* FlashCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A308825E8711A00668FFE /* FlashCard.swift */; };
-		0A3A308D25E871CC00668FFE /* LearningStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A308C25E871CC00668FFE /* LearningStore.swift */; };
-		0A3A309125E8730B00668FFE /* DeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A309025E8730B00668FFE /* DeckView.swift */; };
 		0A3A309E25E8826700668FFE /* DailyAnimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A309D25E8826700668FFE /* DailyAnimal.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,9 +25,6 @@
 		0A3A307825E86FCD00668FFE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0A3A307A25E86FCD00668FFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A3A308525E8707700668FFE /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		0A3A308825E8711A00668FFE /* FlashCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCard.swift; sourceTree = "<group>"; };
-		0A3A308C25E871CC00668FFE /* LearningStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningStore.swift; sourceTree = "<group>"; };
-		0A3A309025E8730B00668FFE /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
 		0A3A309D25E8826700668FFE /* DailyAnimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyAnimal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -49,8 +43,6 @@
 			isa = PBXGroup;
 			children = (
 				0A3A308525E8707700668FFE /* CardView.swift */,
-				0A3A309025E8730B00668FFE /* DeckView.swift */,
-				0A3A308825E8711A00668FFE /* FlashCard.swift */,
 				0A33CAB525E9774300228903 /* LearnAnimals.swift */,
 			);
 			path = "Learn Animals";
@@ -87,7 +79,6 @@
 				0A3A307325E86FCB00668FFE /* ContentView.swift */,
 				0A33CAAF25E9553800228903 /* Daily Animal */,
 				0A33CAAE25E9550D00228903 /* Learn Animals */,
-				0A3A308C25E871CC00668FFE /* LearningStore.swift */,
 				0A3A307525E86FCD00668FFE /* Assets.xcassets */,
 				0A3A307A25E86FCD00668FFE /* Info.plist */,
 				0A3A307725E86FCD00668FFE /* Preview Content */,
@@ -176,11 +167,8 @@
 				0A3A307425E86FCB00668FFE /* ContentView.swift in Sources */,
 				0A3A309E25E8826700668FFE /* DailyAnimal.swift in Sources */,
 				0A3A308625E8707700668FFE /* CardView.swift in Sources */,
-				0A3A308925E8711A00668FFE /* FlashCard.swift in Sources */,
 				0A33CAB625E9774300228903 /* LearnAnimals.swift in Sources */,
 				0A3A307225E86FCB00668FFE /* CardeoApp.swift in Sources */,
-				0A3A308D25E871CC00668FFE /* LearningStore.swift in Sources */,
-				0A3A309125E8730B00668FFE /* DeckView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

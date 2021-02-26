@@ -32,14 +32,13 @@
 
 import SwiftUI
 
-enum DiscardedDirection {
-  case left
-  case right
-}
-
 struct CardView: View {
-  let flashCard: FlashCard
-
+  @Binding var score: Int
+  @Binding var deck: [String]
+  
+  let animalName: String
+  let rotation = Angle(degrees: [0, 3.5, -10, -4.5, 6].randomElement()!)
+  
   var body: some View {
     ZStack {
       Rectangle()
@@ -47,17 +46,18 @@ struct CardView: View {
         .frame(width: 320, height: 210)
         .cornerRadius(12)
       VStack {
-        Image(flashCard.animalName)
+        Image(animalName)
           .resizable()
           .scaledToFit()
-          Text(flashCard.animalName)
-            .font(.largeTitle)
-            .foregroundColor(.white)
+        Text(animalName)
+          .font(.largeTitle)
+          .foregroundColor(.white)
         Spacer()
       }
     }
-    .frame(width: 320, height: 210)
+    .rotationEffect(rotation)
     .shadow(radius: 6)
+    .frame(width: 320, height: 210)
     .animation(.spring())
   }
 }
@@ -65,7 +65,6 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
   static var previews: some View {
-    let card = FlashCard(animalName: "Blobfish")
-    return CardView(flashCard: card)
+    CardView(score: .constant(0), deck: .constant(starterAnimals), animalName: "Pallas Cat")
   }
 }

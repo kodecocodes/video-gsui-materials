@@ -35,7 +35,28 @@ import SwiftUI
 struct DailyAnimal: View {
   var animalName: String
   
+  @GestureState private var gestureScale = CGFloat(0)
+  @GestureState private var gestureRotation = Angle(degrees: 0)
+  
+  @State private var scale = CGFloat(1.0)
+  @State private var rotation = Angle(degrees: 0)
+  
   var body: some View {
+    let magnify = MagnificationGesture()
+      .updating($gestureScale) { value, state, _ in
+        state = (value - 1)
+      }
+      .onEnded { value in
+        self.scale += value - 1
+      }
+    
+    let rotate = RotationGesture()
+      .updating($gestureRotation) { value, state, _ in
+        state = value
+      }
+      .onEnded { value in
+        self.rotation += value
+      }
     
     return VStack(spacing: 50.0) {
       Text(animalName)
@@ -45,6 +66,10 @@ struct DailyAnimal: View {
         .resizable()
         .scaledToFit()
         .frame(width: 300, height: 300)
+        .scaleEffect(scale + gestureScale)
+        .rotationEffect(rotation + gestureRotation)
+        .gesture(magnify)
+        .gesture(rotate)
     }
   }
 }

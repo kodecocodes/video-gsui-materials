@@ -36,8 +36,7 @@ struct DailyAnimal: View {
   var animalName: String
   
   var body: some View {
-    
-    return VStack(spacing: 50.0) {
+    VStack(spacing: 50.0) {
       Text(animalName)
         .font(.largeTitle)
       
