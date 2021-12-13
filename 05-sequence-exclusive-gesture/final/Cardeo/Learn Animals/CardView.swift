@@ -109,7 +109,6 @@ struct CardView: View {
     .frame(width: 320, height: 210)
     .offset(self.offset)
     .scaleEffect(isLongPressed ? 1.1 : 1)
-    .animation(.spring())
     .gesture(
       TapGesture(count: 2)
         .onEnded {

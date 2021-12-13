@@ -68,7 +68,6 @@ struct LearnAnimals: View {
       
       Spacer()
     }
-    .animation(.spring())
   }
 }
 

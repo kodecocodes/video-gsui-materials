@@ -98,7 +98,6 @@ struct CardView: View {
     .shadow(radius: 6)
     .frame(width: 320, height: 210)
     .offset(self.offset)
-    .animation(.spring())
     .gesture(
       TapGesture(count: 2)
         .onEnded {

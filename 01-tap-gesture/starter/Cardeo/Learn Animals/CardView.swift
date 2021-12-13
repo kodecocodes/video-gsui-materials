@@ -58,7 +58,6 @@ struct CardView: View {
     .rotationEffect(rotation)
     .shadow(radius: 6)
     .frame(width: 320, height: 210)
-    .animation(.spring())
   }
 }
 
